@@ -148,3 +148,17 @@ h2 {
 .weather-days .card:hover {
   background: #f8dc3e;
 }
+
+footer {
+  font-size: 12px;
+  color: rgb(49, 72, 175);
+  margin-top: 10px;
+}
+
+.github-link {
+  color: rgb(49, 72, 175);
+}
+
+.github-link:hover {
+  color: rgb(255, 253, 235);
+}
