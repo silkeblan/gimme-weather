@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/179085393d.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="src/style.css">
+  <title>GimmeWeather</title>
+</head>
+<body>
+<div class="container-fluid">
+
+  <h1>GimmeWeather</h1>
+  
+  <div class="outer-box card p-3">
+    
+    <div class="row">
+      <div class="col-10">
+        <form class="search-form" id="search-form">
+          <input type="text" placeholder="Enter location" class="form-control border-0 shadow-sm" id="location-input" autofocus autocomplete=off>
+          <input type="submit" value="Search" class="btn shadow-sm">
+       </form>
+      </div>
+      <div class="col-2 current-button-div">
+        <input type="button" id="current-location-btn" class="btn shadow-sm" value="Current">
+      </div>
+      </div>
+
+    <section class="city-div">
+      <h2 class="city-name">
+        <span id="city-name">London</span>, <span id="country-name">GB</span>
+      </h2>
+      <p class="day-and-time" id="day-and-time">Friday, 15:00</p>
+      <p class="forecast" id="weather-word">--</p>
+    </section>
+
+    <div class="row middle-section">
+    <section class="temperature col-6">
+      <span id="main-weather-icon"></span>
+      <span class="temp" id="temp">-</span><span id="unit">°C</span><a href="#" class="alt-degree" id="alt-unit">°F</a>
+    </section>
+    
+    <section class="weather-stats col-6">
+      Pressure: <span id="pressure">--</span> hPa <br />
+      Humidity: <span id="humidity">--</span>% <br />
+      Wind: <span id="wind">--</span> mps
+    </section>
+    </div>
+
+    <section class="weather-days row bottom-row">
+      <div class="col-2 card">
+        <span class = "bottom-days">--</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+      <div class="col-2 card">
+        <span class="bottom-days">--</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+      <div class="col-2 card">
+        <span class="bottom-days">--</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+      <div class="col-2 card">
+        <span class="bottom-days">Monday</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+      <div class="col-2 card">
+        <span class="bottom-days">Tuesday</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+      <div class="col-2 card">
+        <span class="bottom-days">Wednesday</span>
+        <span class="days-weather-img"></span>
+        <p class="day-temperatures">
+          <strong><span class="max-temp">--</span>°</strong> / <span class="min-temp">--°</span>
+        </p>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="src/script.js"></script>
+</body>
+</html>

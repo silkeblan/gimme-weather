@@ -1,0 +1,150 @@
+body {
+  font-family: "Rubik", sans-serif;
+  width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  background: #ff6a8a;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1 {
+  text-align: center;
+  font-size: 54px;
+  margin: 20px 0;
+  color: rgb(255, 253, 235);
+  font-family: soft marshmallow, sans serif;
+  text-transform: capitalize;
+}
+
+h2 {
+  line-height: 1.2;
+  font-size: 40px;
+}
+
+.outer-box {
+  background: rgb(255, 253, 235);
+}
+
+.col-10 {
+  padding-right: 0;
+}
+
+.col-2.current-button-div {
+  padding: 0;
+}
+
+.form-control {
+  width: 80%;
+  display: inline;
+  margin-right: 5px;
+}
+
+.btn {
+  display: inline;
+  position: relative;
+  top: -1px;
+  background: #f8dc3e;
+  border: 1px solid #f8dc3e;
+}
+
+.btn:hover {
+  background: #c7b02e;
+  border-color: #c7b02e;
+}
+
+#current-location-btn {
+  display: inline;
+  width: 80px;
+  background: rgb(49, 175, 97);
+  border-color: rgb(49, 175, 97);
+  color: rgb(255, 253, 235);
+}
+
+#current-location-btn:hover {
+  background: rgb(36, 109, 64);
+  border-color: rgb(36, 109, 64);
+}
+
+.city-div {
+  margin-top: 15px;
+}
+
+.city-name {
+  color: rgb(49, 72, 175);
+}
+
+.city-div p {
+  line-height: 1;
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.temperature {
+  font-size: 52px;
+  margin-top: 20px;
+  color: rgb(49, 72, 175);
+}
+
+.alt-degree {
+  font-size: 14px;
+  position: relative;
+  top: -25px;
+  left: 10px;
+}
+
+.weather-stats {
+  text-align: right;
+  font-size: 14px;
+  margin-top: 30px;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.weather-days {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.days-weather-img {
+  font-size: 20px;
+  color: rgb(49, 175, 97);
+  line-height: 1;
+}
+
+.day-temperatures {
+  opacity: 0.7;
+}
+
+.day-temperatures strong {
+  opacity: 1;
+}
+
+.min-temp {
+  opacity: 0.7;
+}
+
+.bottom-row {
+  height: 110px;
+  margin: 10px 1px 15px 1px;
+}
+
+.middle-section {
+  height: 110px;
+  margin: 10px 1px 15px 1px;
+  margin: 0;
+}
+
+.weather-days .card {
+  line-height: 3;
+  border-width: 0;
+  padding-top: 15px;
+  background: none;
+  transition: all 150ms ease-in-out;
+}
+
+.weather-days .card:hover {
+  background: #f8dc3e;
+}
