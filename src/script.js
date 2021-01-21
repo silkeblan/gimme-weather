@@ -44,7 +44,6 @@ function capitalise(string) {
 }
 
 function displayWeatherIcon(code) {
-  console.log(code);
   let iconCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "09n", "10d", "10n", "11d", "11n", "13d", "13n", "50d", "50n"];
   let icons = ["<i class='fas fa-sun'></i>", "<i class='fas fa-moon'></i>", "<i class='fas fa-cloud-sun'></i>", "<i class='fas fa-cloud-moon'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud-sun-rain'></i>", "<i class='fas fa-cloud-moon-rain'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-smog'></i>", "<i class='fas fa-smog'></i>"]
   let iconIndex = iconCodes.indexOf(code);
@@ -52,11 +51,24 @@ function displayWeatherIcon(code) {
   document.querySelector(".days-weather-img").innerHTML = icons[iconIndex];
 }
 
+function setTime(timestamp) {
+  let lastUpdateTime = new Date(timestamp);
+  let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let weekDay = weekDays[lastUpdateTime.getDay()];
+  let hour = lastUpdateTime.getHours();
+  let minute = lastUpdateTime.getMinutes();
+  if (minute < 10){
+  minute = `0${minute}`;
+}
+  document.querySelector("#day-and-time").innerHTML = `${weekDay}, ${hour}:${minute}`;
+}
 
 function displayWeatherConditions(response){
   console.log(response);
   document.querySelector("#city-name").innerHTML = response.data.name;
   document.querySelector("#country-name").innerHTML = response.data.sys.country;
+  let timestamp = response.data.dt * 1000;
+  setTime(timestamp);
   mainTemp.innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#weather-word").innerHTML = capitalise(response.data.weather[0].description);
   document.querySelector("#pressure").innerHTML = response.data.main.pressure;
@@ -93,24 +105,16 @@ function changeBottomDays(day) {
   }
 }
 
-  //Set date and time
-
-let now = new Date();
-let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-let weekDay = weekDays[now.getDay()];
-let hour = now.getHours();
-let minute = now.getMinutes();
-if (minute < 10){
-  minute = "0" + minute;
-}
-let dayAndTime = document.querySelector("#day-and-time");
-dayAndTime.innerHTML = `${weekDay}, ${hour}:${minute}`;
-let bottomDays = document.querySelectorAll(".bottom-days");
-bottomDays.forEach(changeBottomDays);
-
   //Set current temp
 
 searchCity("London")
+
+  //Set bottom days
+
+let now = new Date();
+let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let bottomDays = document.querySelectorAll(".bottom-days");
+bottomDays.forEach(changeBottomDays);
 
 //Search form
 
