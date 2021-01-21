@@ -21,8 +21,8 @@ function changeUnit(event) {
     altUnit.innerHTML = "°F";
     mainTemp.innerHTML = (Math.round(rawCelsius));
   }
-  let dayTemps = document.querySelectorAll(".day-temp");
-  dayTemps.forEach(changeDayUnits);
+  document.querySelectorAll(".max-temp").forEach(changeDayUnits);
+  document.querySelectorAll(".min-temp").forEach(changeDayUnits);
 }
 
 function calculateCoords(position) {
@@ -63,7 +63,7 @@ function displayWeatherConditions(response){
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
   document.querySelector(".max-temp").innerHTML = Math.round(response.data.main.temp_max);
-  document.querySelector(".min-temp").innerHTML = `${Math.round(response.data.main.temp_min)}°`;
+  document.querySelector(".min-temp").innerHTML = `${Math.round(response.data.main.temp_min)}`;
   displayWeatherIcon(response.data.weather[0].icon);
 }
 
