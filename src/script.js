@@ -28,7 +28,6 @@ function changeUnit(event) {
 function calculateCoords(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  let apiKey = "a2e5028c14210b1823ceb2133cbf4676";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`
   axios.get(apiUrl).then(displayWeatherConditions);
@@ -44,16 +43,13 @@ function capitalise(string) {
 }
 
 function displayWeatherIcon(code) {
-  let iconCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "09n", "10d", "10n", "11d", "11n", "13d", "13n", "50d", "50n"];
-  let icons = ["<i class='fas fa-sun'></i>", "<i class='fas fa-moon'></i>", "<i class='fas fa-cloud-sun'></i>", "<i class='fas fa-cloud-moon'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud-sun-rain'></i>", "<i class='fas fa-cloud-moon-rain'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-smog'></i>", "<i class='fas fa-smog'></i>"]
   let iconIndex = iconCodes.indexOf(code);
   document.querySelector("#main-weather-icon").innerHTML = icons[iconIndex];
-  document.querySelector(".days-weather-img").innerHTML = icons[iconIndex];
+  //document.querySelector(".days-weather-img").innerHTML = icons[iconIndex];
 }
 
 function setTime(timestamp) {
   let lastUpdateTime = new Date(timestamp);
-  let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   let weekDay = weekDays[lastUpdateTime.getDay()];
   let hour = lastUpdateTime.getHours();
   let minute = lastUpdateTime.getMinutes();
@@ -63,8 +59,7 @@ function setTime(timestamp) {
   document.querySelector("#day-and-time").innerHTML = `${weekDay}, ${hour}:${minute}`;
 }
 
-function displayWeatherConditions(response){
-  console.log(response);
+function displayWeatherConditions(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
   document.querySelector("#country-name").innerHTML = response.data.sys.country;
   let timestamp = response.data.dt * 1000;
@@ -74,13 +69,37 @@ function displayWeatherConditions(response){
   document.querySelector("#pressure").innerHTML = response.data.main.pressure;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
-  document.querySelector(".max-temp").innerHTML = Math.round(response.data.main.temp_max);
-  document.querySelector(".min-temp").innerHTML = `${Math.round(response.data.main.temp_min)}`;
   displayWeatherIcon(response.data.weather[0].icon);
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  getForecast(lat, lon);
+}
+
+function getForecast(lat, lon) {
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+console.log(response);
+//let dayTempNodeList = document.querySelectorAll(".day-temperatures");
+//let dayTempArray = Array.from(dayTempNodeList);
+//console.log(dayTempArray);
+let minTemps = Array.from(document.querySelectorAll(".min-temp"));
+let maxTemps = Array.from(document.querySelectorAll(".max-temp"));
+let weatherImgs = Array.from(document.querySelectorAll(".days-weather-img"));
+for (let index = 0; index < 6; index++) {
+  let maxTemp = Math.round(response.data.daily[index].temp.max);
+  let minTemp = Math.round(response.data.daily[index].temp.min);
+  let imgCode = response.data.daily[index].weather[0].icon;
+  let iconIndex = iconCodes.indexOf(imgCode);
+  minTemps[index].innerHTML = minTemp;
+  maxTemps[index].innerHTML = maxTemp;
+  weatherImgs[index].innerHTML = icons[iconIndex];
+}
 }
 
 function searchCity(city) {
-  let apiKey = "a2e5028c14210b1823ceb2133cbf4676";
   let units = "metric"
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   document.querySelector("#location-input").value = null;
@@ -107,7 +126,12 @@ function changeBottomDays(day) {
 
   //Set current temp
 
+let apiKey = "a2e5028c14210b1823ceb2133cbf4676";
 searchCity("London")
+
+  //Define icons
+let iconCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "09n", "10d", "10n", "11d", "11n", "13d", "13n", "50d", "50n"];
+let icons = ["<i class='fas fa-sun'></i>", "<i class='fas fa-moon'></i>", "<i class='fas fa-cloud-sun'></i>", "<i class='fas fa-cloud-moon'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud-sun-rain'></i>", "<i class='fas fa-cloud-moon-rain'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-smog'></i>", "<i class='fas fa-smog'></i>"]
 
   //Set bottom days
 
@@ -132,4 +156,3 @@ let mainTemp = document.querySelector("#temp");
 let mainUnit = document.querySelector("#unit");
 let altUnit = document.querySelector("#alt-unit");
 altUnit.addEventListener("click", changeUnit);
-
