@@ -1,6 +1,9 @@
 @font-face {
-  font-family: "soft marshmallow";
-  src: url("soft_marshmallow-webfont.woff") format("woff");
+  font-family: "soft_marshmallowregular";
+  src: url("fonts/soft_marshmallow-webfont.woff2") format("woff2"),
+    url("fonts/soft_marshmallow-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
