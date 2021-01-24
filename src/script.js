@@ -45,7 +45,6 @@ function capitalise(string) {
 function displayWeatherIcon(code) {
   let iconIndex = iconCodes.indexOf(code);
   document.querySelector("#main-weather-icon").innerHTML = icons[iconIndex];
-  //document.querySelector(".days-weather-img").innerHTML = icons[iconIndex];
 }
 
 function setTime(timestamp) {
@@ -81,10 +80,6 @@ function getForecast(lat, lon) {
 }
 
 function displayForecast(response) {
-console.log(response);
-//let dayTempNodeList = document.querySelectorAll(".day-temperatures");
-//let dayTempArray = Array.from(dayTempNodeList);
-//console.log(dayTempArray);
 let minTemps = Array.from(document.querySelectorAll(".min-temp"));
 let maxTemps = Array.from(document.querySelectorAll(".max-temp"));
 let weatherImgs = Array.from(document.querySelectorAll(".days-weather-img"));
@@ -96,6 +91,13 @@ for (let index = 0; index < 6; index++) {
   minTemps[index].innerHTML = minTemp;
   maxTemps[index].innerHTML = maxTemp;
   weatherImgs[index].innerHTML = icons[iconIndex];
+  if (8 < iconIndex && iconIndex <= 13) {
+    weatherImgs[index].style.color = "rgb(190, 35, 68)";
+  } else if (2 < iconIndex && iconIndex < 7 || iconIndex > 13) {
+    weatherImgs[index].style.color = "#eb9635";
+  } else { weatherImgs[index].style.color = "rgb(49, 175, 97)";
+
+  }
 }
 }
 
@@ -124,33 +126,22 @@ function changeBottomDays(day) {
   }
 }
 
-  //Set current temp
-
 let apiKey = "a2e5028c14210b1823ceb2133cbf4676";
 searchCity("London")
 
-  //Define icons
 let iconCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "09n", "10d", "10n", "11d", "11n", "13d", "13n", "50d", "50n"];
 let icons = ["<i class='fas fa-sun'></i>", "<i class='fas fa-moon'></i>", "<i class='fas fa-cloud-sun'></i>", "<i class='fas fa-cloud-moon'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud'></i>", "<i class='fas fa-cloud-sun-rain'></i>", "<i class='fas fa-cloud-moon-rain'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-cloud-showers-heavy'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-bolt'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-snowflake'></i>", "<i class='fas fa-smog'></i>", "<i class='fas fa-smog'></i>"]
-
-  //Set bottom days
 
 let now = new Date();
 let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let bottomDays = document.querySelectorAll(".bottom-days");
 bottomDays.forEach(changeBottomDays);
 
-//Search form
-
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 
-//Current location
-
 let currentLocationButton = document.querySelector("#current-location-btn");
 currentLocationButton.addEventListener("click", getPosition);
-
-//Change unit
 
 let mainTemp = document.querySelector("#temp");
 let mainUnit = document.querySelector("#unit");
